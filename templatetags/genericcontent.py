@@ -1,8 +1,6 @@
 from generic_content.models import GenericContent
 
 from django import template
-from freewanderer.utils.utils import setup_logging
-logger = setup_logging()
 register = template.Library()
 
 class GenericContentNode(template.Node):
