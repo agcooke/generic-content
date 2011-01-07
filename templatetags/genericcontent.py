@@ -8,6 +8,8 @@ class GenericContentNode(template.Node):
         self.current_url = current_url
         self.var_name = var_name
     def render(self, context):
+        if self.current_url[0] != '/':
+            self.current_url = '/'+self.current_url
         context[self.var_name] = GenericContent.objects.get(def_url=self.current_url)
         return ''
 

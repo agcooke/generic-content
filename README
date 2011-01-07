@@ -1,0 +1,44 @@
+This simple DJANGO app makes it possible to easily add default
+content to any page on your website.
+
+It provides a standard model where you can save common pieces of information
+that must be added to each page.
+
+An Admin.py is also added for the backend.
+
+There are two ways to use this APP:
+
+Use the generic_content_context_processor.py to automatically add the 'generic_content'
+object to each page. This is then accessible from all templates:
+
+ <meta name="description" content="{{ generic_content.def_description }}{% endblock %}" />
+
+Or you can use the supplied tag to load it for specific templates:
+
+{% load genericcontent %}
+{% generic_content url_that_you_want_the_content_for as variable_name %}
+<h1>
+     {{ variable_name.def_heading }}
+</h1>
+
+Easy.
+
+INSTALLATION:
+
+In settings.py add:
+                  'generic_content',
+to
+INSTALLED_APPS.
+
+If you would like to add the Context Processor then add something like this to
+settings.py:
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+                               "django.contrib.auth.context_processors.auth",
+                               "django.core.context_processors.debug",
+                               "django.core.context_processors.i18n",
+                               "django.core.context_processors.media",
+                               #"django.core.context_processors.static",
+                               "django.contrib.messages.context_processors.messages",
+                               'generic_content.generic_content_context_processors.generic_content'
+                               )
