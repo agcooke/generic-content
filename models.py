@@ -31,7 +31,7 @@ class PageContent(models.Model):
 
 class GenericContent(PageContent):
     def get_absolute_url(self):
-        return '/'+self.def_url
+        return self.def_url
     def save(self, * args, ** kwargs):
         self.slug = self.def_url
         super(GenericContent, self).save(*args, ** kwargs)
