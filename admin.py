@@ -8,7 +8,7 @@ from generic_content.models import GenericContent
 
 
 class GenericContentAdmin(admin.ModelAdmin):
-    list_display = ('def_title', 'def_heading', 'def_content')
+    list_display = ( 'def_url','def_title',)
     list_filter = ['modified']
     search_fields = ['def_title']
     date_hierarchy = 'modified'
