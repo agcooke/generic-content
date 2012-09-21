@@ -1,6 +1,8 @@
-from generic_content.models import GenericContent
+import logging
+import re
 
 from django import template
+from generic_content.models import GenericContent
 register = template.Library()
 
 class GenericContentNode(template.Node):
@@ -13,10 +15,9 @@ class GenericContentNode(template.Node):
         context[self.var_name] = GenericContent.objects.get(def_url=self.current_url)
         return ''
 
-import re
-#@register.tag
 @register.tag
 def generic_content(parser, token):
+    logging.debug(token)
     # This version uses a regular expression to parse tag contents.
     try:
         # Splitting by None == splitting by spaces.
@@ -26,5 +27,6 @@ def generic_content(parser, token):
     m = re.search(r'(.*?) as (\w+)', arg)
     if not m:
         raise template.TemplateSyntaxError, "%r tag had invalid arguments" % tag_name
-    var_name,current_url = m.groups()
+    current_url,var_name = m.groups()
+    logging.debug(var_name+' -- '+current_url)
     return GenericContentNode(var_name,current_url)
