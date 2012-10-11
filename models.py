@@ -10,6 +10,8 @@ from django.template.defaultfilters import slugify
 class PageContent(models.Model):
     modified = models.DateTimeField()
     def_content = models.TextField(help_text='Main Content for the page.')
+    def_content.blank = True
+    def_content.null = True
     def_title = models.CharField(max_length=255,help_text='Title for the page.')
     def_description = models.CharField(max_length=255,
         help_text='Meta Tag Description content for the page.')
